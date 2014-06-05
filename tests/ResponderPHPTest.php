@@ -23,12 +23,7 @@ $expected = '<?xml version="1.0" encoding="UTF-8"?>
     public function responder_returns_json_data()
     {
         $responder = new Responder();
-$expected = '{
-    "data": {
-        "status": 123,
-        "message": "hello world"
-    }
-}';
+        $expected = '{"data":{"status":123,"message":"hello world"}}';
         $this->assertEquals($responder->json(array('status' => 123, 'message' => 'hello world')), $expected);
     }
 

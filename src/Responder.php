@@ -49,7 +49,7 @@ class Responder
     }
 
     public function json($payload, $startElement = 'data') {
-        return json_encode(array($startElement => $payload), JSON_PRETTY_PRINT);
+        return json_encode(array($startElement => $payload));
     }
 
     public function yaml($payload, $startElement = 'data') {
