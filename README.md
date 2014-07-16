@@ -2,6 +2,10 @@ Responder
 =========
 
 [![Build Status](https://travis-ci.org/nathanmac/Responder.svg?branch=master)](https://travis-ci.org/nathanmac/Responder)
+[![License](http://img.shields.io/packagist/l/nathanmac/Responder.svg)](https://github.com/nathanmac/Responder/blob/master/LICENSE.md)
+[![Code Climate](https://codeclimate.com/github/nathanmac/Responder.png)](https://codeclimate.com/github/nathanmac/Responder)
+[![Coverage Status](https://coveralls.io/repos/nathanmac/Responder/badge.png)](https://coveralls.io/r/nathanmac/Responder)
+[![Release](http://img.shields.io/github/release/nathanmac/Responder.svg)](https://github.com/nathanmac/Responder/releases)
 
 Simple PHP Responder Utility Library for API Development
 
