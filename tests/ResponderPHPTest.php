@@ -11,12 +11,20 @@ class ResponderPHPTest extends PHPUnit_Framework_TestCase {
     {
         $responder = new Responder();
 $expected = '<?xml version="1.0" encoding="UTF-8"?>
-<data>
+<data ref="987">
  <status>123</status>
  <message>hello world</message>
+ <entities>
+  <entity>one</entity>
+  <entity>two</entity>
+ </entities>
+ <values>
+  <value>one</value>
+  <value>two</value>
+ </values>
 </data>
 ';
-        $this->assertEquals($responder->xml(array('status' => 123, 'message' => 'hello world')), $expected);
+        $this->assertEquals($responder->xml(array('@ref' => 987, 'status' => 123, 'message' => 'hello world', 'entities' => array('one', 'two'), 'values' => array('one', 'two'))), $expected);
     }
 
     /** @test */
