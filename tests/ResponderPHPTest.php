@@ -7,6 +7,16 @@ use Nathanmac\ResponderUtility\Responder;
 class ResponderPHPTest extends PHPUnit_Framework_TestCase {
 
     /** @test */
+    public function invalid_data_type_not_array()
+    {
+        $responder = new Responder();
+
+        $this->assertFalse($responder->xml('string input'));
+        $this->assertFalse($responder->xml(null));
+        $this->assertFalse($responder->xml((object) array('message' => 'hello world')));
+    }
+
+    /** @test */
     public function responder_returns_xml_data()
     {
         $responder = new Responder();
