@@ -29,8 +29,8 @@ $expected = '<?xml version="1.0" encoding="UTF-8"?>
   <entity>two</entity>
  </entities>
  <input>
-    <input>one</input>
-    <input>two</input>
+  <input>one</input>
+  <input>two</input>
  </input>
  <values>
   <value>one</value>
