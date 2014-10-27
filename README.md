@@ -16,7 +16,7 @@ Installation
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `Nathanmac/Responder`.
 
 	"require": {
-		"Nathanmac/Responder": "1.*"
+		"Nathanmac/Responder": "2.*"
 	}
 
 Next, update Composer from the Terminal:
