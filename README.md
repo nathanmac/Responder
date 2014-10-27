@@ -5,7 +5,8 @@ Responder
 [![License](http://img.shields.io/packagist/l/nathanmac/Responder.svg)](https://github.com/nathanmac/Responder/blob/master/LICENSE.md)
 [![Code Climate](https://codeclimate.com/github/nathanmac/Responder.png)](https://codeclimate.com/github/nathanmac/Responder)
 [![Coverage Status](https://coveralls.io/repos/nathanmac/Responder/badge.png)](https://coveralls.io/r/nathanmac/Responder)
-[![Release](http://img.shields.io/github/release/nathanmac/Responder.svg)](https://github.com/nathanmac/Responder/releases)
+[![Latest Stable Version](https://poser.pugx.org/nathanmac/responder/v/stable.svg)](https://packagist.org/packages/nathanmac/responder)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/10f1505b-c48f-4020-a762-95d7685820be/mini.png)](https://insight.sensiolabs.com/projects/10f1505b-c48f-4020-a762-95d7685820be)
 
 Simple PHP Responder Utility Library for API Development
 
