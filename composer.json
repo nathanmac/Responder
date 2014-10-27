@@ -3,6 +3,12 @@
     "description": "Simple PHP Responder Utility Library for API Development",
     "keywords": ["responder", "json", "xml", "API", "formatter"],
     "homepage": "https://github.com/nathanmac/Responder",
+    "authors": [
+        {
+            "name": "Nathan Macnamara",
+            "email": "nathan.macnamara@outlook.com"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": ">=5.2.0",
@@ -14,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nathanmac\\ResponderUtility\\": "src/"
+            "Nathanmac\\Utilities\\Responder\\": "src/"
         }
     },
     "minimum-stability": "stable"

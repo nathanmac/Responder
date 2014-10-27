@@ -1,67 +1,98 @@
-<?php namespace Nathanmac\ResponderUtility;
+<?php namespace Nathanmac\Utilities\Responder;
 
-use Symfony\Component\Yaml\Dumper;
-use XMLWriter;
+use Nathanmac\Utilities\Responder\Formats\FormatInterface;
+use Nathanmac\Utilities\Responder\Formats\JSON;
+use Nathanmac\Utilities\Responder\Formats\QueryStr;
+use Nathanmac\Utilities\Responder\Formats\Serialize;
+use Nathanmac\Utilities\Responder\Formats\XML;
+use Nathanmac\Utilities\Responder\Formats\YAML;
 
+/**
+ * Responder Library, designed to generate various formats from a php array structure.
+ *
+ * @package    Nathanmac\Utilities\Responder
+ * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
+ * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
+ */
 class Responder
 {
-    public function xml($data, $startElement = 'data', $xml_version = '1.0', $xml_encoding = 'UTF-8') {
-        if (!is_array($data)) {
-            return false; //return false error occurred
-        }
-        $xml = new XMLWriter();
-        $xml->openMemory();
-        $xml->setIndent(true);
-        $xml->startDocument($xml_version, $xml_encoding);
-        $xml->startElement($startElement);
-
-        $this->write($xml, $data);
-
-        $xml->endElement(); //write end element
-        //Return the XML results
-        return $xml->outputMemory(true);
+    /**
+     * Responder payload string using given formatter.
+     *
+     * @param array $payload
+     * @param FormatInterface $format
+     * @param string $container
+     *
+     * @return string
+     */
+    public function generate($payload, FormatInterface $format, $container = 'data') {
+        return $format->generate($payload, $container);
     }
 
-    private function write(XMLWriter $xml, $data, $last_key = 'entity') {
-        foreach ($data as $key => $value) {
-            if (is_numeric($key)) {
-                if (substr($last_key, -3) == 'ies') {
-                    $key = substr($last_key, 0, -3) . 'y';
-                } else if (substr($last_key, -1) == 's') {
-                    $key = substr($last_key, 0, -1);
-                } else {
-                    $key = $last_key;
-                }
-            }
+    /* ------------ Helper Methods ------------ */
 
-            if (is_array($value)) {
-                $xml->startElement($key);
-                $this->write($xml, $value, $key);
-                $xml->endElement();
-                continue;
-            }
-            if ($key[0]=='@') {
-                @$xml->writeAttribute(substr($key, 1), ($value==='') ? null: $value);
-            }else {
-                @$xml->writeElement($key, ($value==='') ? null: $value);
-            }
-        }
+    /**
+     * XML Responder, helper function.
+     *
+     * @param array  $payload
+     * @param string $container
+     *
+     * @return string
+     */
+    public function xml($payload, $container = 'data')
+    {
+        return $this->generate($payload, new XML(), $container);
     }
 
-    public function json($payload, $startElement = 'data') {
-        return json_encode(array($startElement => $payload));
+    /**
+     * JSON Responder, helper function.
+     *
+     * @param array  $payload
+     * @param string $container
+     *
+     * @return string
+     */
+    public function json($payload, $container = 'data')
+    {
+        return $this->generate($payload, new JSON(), $container);
     }
 
-    public function yaml($payload, $startElement = 'data') {
-        $dumper = new Dumper();
-        return $dumper->dump(array($startElement => $payload), 9999);
+    /**
+     * YAML Responder, helper function.
+     *
+     * @param array  $payload
+     * @param string $container
+     *
+     * @return string
+     */
+    public function yaml($payload, $container = 'data')
+    {
+        return $this->generate($payload, new YAML(), $container);
     }
 
-    public function serialize($payload, $startElement = 'data') {
-        return serialize(array($startElement => $payload));
+    /**
+     * Serialize Responder, helper function.
+     *
+     * @param array  $payload
+     * @param string $container
+     *
+     * @return string
+     */
+    public function serialize($payload, $container = 'data')
+    {
+        return $this->generate($payload, new Serialize(), $container);
     }
 
-    public function querystr($payload, $startElement = 'data') {
-        return http_build_query(array($startElement => $payload));
+    /**
+     * Query String Responder, helper function.
+     *
+     * @param array  $payload
+     * @param string $container
+     *
+     * @return string
+     */
+    public function querystr($payload, $container = 'data')
+    {
+        return $this->generate($payload, new QueryStr(), $container);
     }
 }
