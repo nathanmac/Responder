@@ -2,7 +2,7 @@
 
 require "../vendor/autoload.php";
 
-use Nathanmac\ResponderUtility\Responder;
+use Nathanmac\Utilities\Responder;
 $responder = new Responder();
 
 $body = array(
