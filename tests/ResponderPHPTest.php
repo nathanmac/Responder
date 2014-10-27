@@ -2,7 +2,7 @@
 
 require dirname(__FILE__)."/../vendor/autoload.php";
 
-use Nathanmac\ResponderUtility\Responder;
+use Nathanmac\Utilities\Responder\Responder;
 
 class ResponderPHPTest extends PHPUnit_Framework_TestCase {
 
