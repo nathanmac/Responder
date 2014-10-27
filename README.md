@@ -22,13 +22,41 @@ Next, update Composer from the Terminal:
 
     composer update
 
+### Laravel Users
+
+If you are a Laravel user, then there is a service provider that you can make use of to automatically prepare the bindings and such.
+
+```php
+
+// app/config/app.php
+
+'providers' => [
+    '...',
+    'Nathanmac\Utilities\Responder\ResponderServiceProvider'
+];
+```
+
+When this provider is booted, you'll have access to a helpful `Responder` facade, which you may use in your controllers.
+
+```php
+public function index()
+{
+    Responder::json($payload);		    // Array > JSON
+    Responder::xml($payload);		    // Array > XML
+    Responder::yaml($payload);		    // Array > YAML
+    Responder::querystr($payload);	    // Array > Query String
+    Responder::serialize($payload);	    // Array > Serialized Object
+}
+```
+
+
 #### Responder Functions
 ```php
-	$responder->json($payload);		    // JSON > Array
-	$responder->xml($payload);		    // XML > Array
-	$responder->yaml($payload);		    // YAML > Array
-	$responder->querystr($payload);	    // Query String > Array
-	$responder->serialize($payload);	// Serialized Object > Array
+	$responder->json($payload);		    // Array > JSON
+	$responder->xml($payload);		    // Array > XML
+	$responder->yaml($payload);		    // Array > YAML
+	$responder->querystr($payload);	    // Array > Query String
+	$responder->serialize($payload);	// Array > Serialized Object
 ```
 
 #### Respond with JSON
