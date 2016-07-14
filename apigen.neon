@@ -1,0 +1,7 @@
+source:
+	- src
+destination: ./docs
+templateTheme: bootstrap
+title: PHP Responder
+baseUrl: http://nathanmac.github.io/Responder
+googleAnalytics: UA-58213797-1

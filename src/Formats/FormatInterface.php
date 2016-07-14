@@ -1,4 +1,6 @@
-<?php namespace Nathanmac\Utilities\Responder\Formats;
+<?php
+
+namespace Nathanmac\Utilities\Responder\Formats;
 
 /**
  * Formatter Interface
@@ -7,7 +9,8 @@
  * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
  * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
  */
-interface FormatInterface {
+interface FormatInterface
+{
 
     /**
      * Generate Payload Data
@@ -15,8 +18,9 @@ interface FormatInterface {
      * @param array  $payload
      * @param string $container
      *
+     * @throws ResponderException
+     *
      * @return string
      */
     public function generate($payload, $container = 'data');
-
 }

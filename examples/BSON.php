@@ -13,5 +13,5 @@ $body = [
         'body'    => 'Hello, whats going on...'
 ];
 
-header('Content-Type: application/x-www-form-urlencoded');
-print $responder->querystr($body);
+header('Content-Type: application/bson');
+print $responder->bson($body);

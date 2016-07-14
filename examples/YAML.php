@@ -2,17 +2,18 @@
 
 require "../vendor/autoload.php";
 
-use Nathanmac\Utilities\Responder;
+use Nathanmac\Utilities\Responder\Responder;
+
 $responder = new Responder();
 
-$body = array(
-    'message' => array(
-        'to' => 'Jack Smith',
-        'from' => 'Jane Doe',
+$body = [
+    'message' => [
+        'to'      => 'Jack Smith',
+        'from'    => 'Jane Doe',
         'subject' => 'Hello World',
-        'body' => 'Hello, whats going on...'
-    )
-);
+        'body'    => 'Hello, whats going on...'
+    ]
+];
 
 header('Content-Type: application/x-yaml');
 print $responder->yaml($body);

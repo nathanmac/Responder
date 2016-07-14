@@ -1,4 +1,8 @@
-<?php namespace Nathanmac\Utilities\Responder\Formats;
+<?php
+
+namespace Nathanmac\Utilities\Responder\Formats;
+
+use Nathanmac\Utilities\Responder\Exceptions\ResponderException;
 
 /**
  * JSON Formatter
@@ -7,19 +11,36 @@
  * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
  * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
  */
-class JSON implements FormatInterface {
-
+class JSON implements FormatInterface
+{
     /**
      * Generate Payload Data
      *
      * @param array  $payload
      * @param string $container
      *
+     * @throws ResponderException
+     *
      * @return string
      */
     public function generate($payload, $container = 'data')
     {
-        return json_encode(array($container => $payload));
-    }
+        if ($payload) {
+            $prevHandler = set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext) {
+                throw new ResponderException('Failed To Generate JSON'); // @codeCoverageIgnore
+            });
 
+            $json = json_encode([$container => $payload]);
+            if ( ! $json) {
+                set_error_handler($prevHandler);  // @codeCoverageIgnore
+                throw new ResponderException('Failed To Generate JSON');  // @codeCoverageIgnore
+            }
+
+            set_error_handler($prevHandler);
+
+            return $json;
+        }
+
+        return '';
+    }
 }
