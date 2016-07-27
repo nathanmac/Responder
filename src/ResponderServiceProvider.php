@@ -1,6 +1,7 @@
-<?php namespace Nathanmac\Utilities\Responder;
+<?php
 
-use Illuminate\Foundation\AliasLoader;
+namespace Nathanmac\Utilities\Responder;
+
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -10,8 +11,8 @@ use Illuminate\Support\ServiceProvider;
  * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
  * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
  */
-class ResponderServiceProvider extends ServiceProvider {
-
+class ResponderServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -26,24 +27,9 @@ class ResponderServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('Responder', function($app) {
+        $this->app->bind('Responder', function ($app) {
             return new Responder;
         });
-    }
-
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->package('nathanmac/responder');
-
-        AliasLoader::getInstance()->alias(
-            'Responder',
-            'Nathanmac\Utilities\Responder\Facades\Responder'
-        );
     }
 
     /**
@@ -53,7 +39,6 @@ class ResponderServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array('Responder');
+        return ['Responder'];
     }
-
 }

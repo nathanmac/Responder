@@ -1,4 +1,6 @@
-<?php namespace Nathanmac\Utilities\Responder\Formats;
+<?php
+
+namespace Nathanmac\Utilities\Responder\Formats;
 
 /**
  * Query String Formatter
@@ -7,8 +9,8 @@
  * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
  * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
  */
-class QueryStr implements FormatInterface {
-
+class QueryStr implements FormatInterface
+{
     /**
      * Generate Payload Data
      *
@@ -19,7 +21,10 @@ class QueryStr implements FormatInterface {
      */
     public function generate($payload, $container = 'data')
     {
-        return http_build_query(array($container => $payload));
-    }
+        if ($payload) {
+            return http_build_query([$container => $payload]);
+        }
 
+        return '';
+    }
 }

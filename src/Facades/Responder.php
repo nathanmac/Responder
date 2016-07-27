@@ -1,4 +1,6 @@
-<?php namespace Nathanmac\Utilities\Responder\Facades;
+<?php
+
+namespace Nathanmac\Utilities\Responder\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,13 +11,12 @@ use Illuminate\Support\Facades\Facade;
  * @author     Nathan Macnamara <nathan.macnamara@outlook.com>
  * @license    https://github.com/nathanmac/Responder/blob/master/LICENSE.md  MIT
  */
-class Responder extends Facade {
-
+class Responder extends Facade
+{
     /**
      * Get the registered name of the component.
      *
      * @return string
      */
     protected static function getFacadeAccessor() { return 'Responder'; }
-
 }

@@ -2,7 +2,7 @@
 
 require "../vendor/autoload.php";
 
-use Nathanmac\Utilities\Responder\Responder;
+use Nathanmac\Utilities\Responder\Respoder;
 
 $responder = new Responder();
 
@@ -13,5 +13,5 @@ $body = [
         'body'    => 'Hello, whats going on...'
 ];
 
-header('Content-Type: application/x-www-form-urlencoded');
-print $responder->querystr($body);
+header("Content-Type: {$responder->getContentType()}");
+print $responder->payload($body);
