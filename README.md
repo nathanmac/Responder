@@ -1,27 +1,24 @@
 Responder
 =========
 
-[![Build Status](https://travis-ci.org/nathanmac/Responder.svg?branch=master)](https://travis-ci.org/nathanmac/Responder)
-[![License](http://img.shields.io/packagist/l/nathanmac/Responder.svg)](https://github.com/nathanmac/Responder/blob/master/LICENSE.md)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/nathanmac/Responder.svg?style=flat-square)](https://packagist.org/packages/nathanmac/Responder)
+[![Build Status](https://img.shields.io/travis/nathanmac/Responder/master.svg?style=flat-square)](https://travis-ci.org/nathanmac/Responder)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Code Climate](https://codeclimate.com/github/nathanmac/Responder.png)](https://codeclimate.com/github/nathanmac/Responder)
 [![Coverage Status](https://coveralls.io/repos/nathanmac/Responder/badge.png)](https://coveralls.io/r/nathanmac/Responder)
-[![Latest Stable Version](https://poser.pugx.org/nathanmac/responder/v/stable.svg)](https://packagist.org/packages/nathanmac/responder)
+[![Total Downloads](https://img.shields.io/packagist/dt/nathanmac/Responder.svg?style=flat-square)](https://packagist.org/packages/nathanmac/Responder)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/10f1505b-c48f-4020-a762-95d7685820be/mini.png)](https://insight.sensiolabs.com/projects/10f1505b-c48f-4020-a762-95d7685820be)
 
 Simple PHP Responder Utility Library for API Development
 
+Also see the [Parser](https://github.com/nathanmac/Parser) library for handling input.
+
 Installation
 ------------
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `Nathanmac/Responder`.
+Begin by installing this package through Composer. From the Terminal:
 
-	"require": {
-		"Nathanmac/Responder": "2.*"
-	}
-
-Next, update Composer from the Terminal:
-
-    composer update
+    composer require nathanmac/Responder
 
 ### Laravel Users
 
@@ -52,8 +49,22 @@ public function index()
 }
 ```
 
+All the examples below assume you *aren't* using Laravel, and therefore don't have access to the facade.  As with any other facade, instead of:
 
-#### Responder Functions
+```php
+$responder = new Responder();
+
+$responder->{$method}($payload);
+```
+
+just use:
+
+```php
+Responder::{$method}($payload);
+```
+
+Responder Functions
+-------------------
 ```php
 $responder->json($payload);         // Array > JSON
 $responder->xml($payload);          // Array > XML
@@ -64,7 +75,7 @@ $responder->bson($payload);         // Array > BSON
 $responder->msgpack($payload);      // Array > MessagePack
 ```
 
-#### Respond with Automatic Detection
+### Respond with Automatic Detection
 ```php
 $responder = new Responder();
 
@@ -81,7 +92,7 @@ header("Content-Type: {$responder->getContentType()}");
 print $responder->payload($body);
 ```
 
-#### Respond with JSON
+### Respond with JSON
 ```php
 $responder = new Responder();
 
@@ -98,7 +109,7 @@ header('Content-Type: application/json');
 print $responder->json($body);
 ```
 
-#### Respond with XML
+### Respond with XML
 ```php
 $responder = new Responder();
 
@@ -115,7 +126,7 @@ header('Content-Type: application/xml; charset=utf-8');
 print $responder->xml($body);
 ```
 
-#### Respond with Query String
+### Respond with Query String
 ```php
 $responder = new Responder();
 
@@ -130,7 +141,7 @@ header('Content-Type: application/x-www-form-urlencoded');
 print $responder->querystr($body);
 ```
 
-#### Respond with Serialized Object
+### Respond with Serialized Object
 ```php
 $responder = new Responder();
 
@@ -147,7 +158,7 @@ header('Content-Type: application/vnd.php.serialized');
 print $responder->serialize($body);
 ```
 
-#### Respond with YAML
+### Respond with YAML
 ```php
 $responder = new Responder();
 
@@ -164,7 +175,7 @@ header('Content-Type: application/x-yaml');
 print $responder->yaml($body);
 ```
 
-#### Respond with BSON
+### Respond with BSON
 ```php
 $responder = new Responder();
 
@@ -181,7 +192,7 @@ header('Content-Type: application/bson');
 print $responder->bson($body);
 ```
 
-#### Respond with MessagePack
+### Respond with MessagePack
 ```php
 $responder = new Responder();
 
@@ -231,7 +242,7 @@ class CustomFormatter implements FormatInterface {
 }
 ```
 
-##### Using the CustomFormatter
+### Using the CustomFormatter
 
 ```php
 use Acme\Formatters\CustomFormatter;
@@ -240,7 +251,7 @@ $responder = new Responder();
 $generated = $responder->generate(['raw' => 'payload', 'data'], new CustomFormatter());
 ```
 
-##### Register the CustomFormatter
+### Autodetecting the CustomFormatter
 
 ```php
 use Acme\Formatters\CustomFormatter;
@@ -256,3 +267,59 @@ Testing
 To test the library itself, run the PHPUnit tests:
 
     phpunit tests/
+
+Contributing
+------------
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+Credits
+-------
+
+- [nathanmac](https://github.com/nathanmac)
+- [All Contributors](../../contributors)
+
+License
+-------
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+Appendix
+--------
+
+###### Supported Content-Types
+```
+XML
+---
+application/xml > XML
+text/xml > XML
+
+JSON
+----
+application/json > JSON
+application/x-javascript > JSON
+text/javascript > JSON
+text/x-javascript > JSON
+text/x-json > JSON
+
+YAML
+----
+text/yaml > YAML
+text/x-yaml > YAML
+application/yaml > YAML
+application/x-yaml > YAML
+
+BSON
+----
+application/bson > BSON
+
+MSGPack
+-------
+application/msgpack > MSGPack
+application/x-msgpack > MSGPack
+
+MISC
+----
+application/vnd.php.serialized > Serialized Object
+application/x-www-form-urlencoded' > Query String
+```
